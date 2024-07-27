@@ -1,7 +1,7 @@
 <?php
  class db{
     // Properties
-    private $host = 'localhost';
+    private $host = '127.0.0.1'; // localhost not working so using IP address
     private $user = 'root';
     private $password = '';
     private $dbname = 'webtechhactt';
