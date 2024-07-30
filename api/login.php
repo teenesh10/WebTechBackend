@@ -16,7 +16,7 @@ if (isset($data['username']) && isset($data['password'])) {
     $password = $data['password'];
     
     // Fetch user by username
-    $stmt = $conn->prepare("SELECT * FROM Users WHERE username = ?");
+    $stmt = $conn->prepare("SELECT userID, username, password, roleID FROM Users WHERE username = ?");
     $stmt->execute([$username]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
@@ -27,7 +27,11 @@ if (isset($data['username']) && isset($data['password'])) {
         $_SESSION['roleID'] = $user['roleID'];
         echo json_encode([
             "message" => "Login successful",
-            "user" => $user
+            "user" => [
+                "userID" => $user['userID'],
+                "username" => $user['username'],
+                "roleID" => $user['roleID']
+            ]
         ]);
     } else {
         // Invalid credentials
